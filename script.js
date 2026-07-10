@@ -149,4 +149,16 @@
       location.href = 'mailto:collaborate@emergingtech.co?subject='+encodeURIComponent('['+f.get('reason')+'] Inquiry from '+f.get('name'))+'&body='+body;
     });
   }
+
+  /* job application forms (preview site — does not transmit data anywhere) */
+  var af = document.getElementById('applyForm');
+  if(af){
+    af.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var note = document.getElementById('applySubmitted');
+      var btn = af.querySelector('button[type="submit"]');
+      if(btn){ btn.disabled = true; btn.textContent = 'Preview only — not submitted'; }
+      if(note){ note.classList.add('show'); note.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'}); }
+    });
+  }
 })();
