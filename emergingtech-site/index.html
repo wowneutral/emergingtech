@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Emerging Tech | Federal IT, Cybersecurity & Cloud Solutions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alachua, FL-based SDVOSB delivering cybersecurity, cloud, healthcare IT modernization, and enterprise integration to federal and defense agencies. CMMI Level 3 | 10+ years.">
+<link rel="icon" href="https://emergingtech.co/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF8; --white:#FFFFFF; --wash:#F1F2EE;
+    --navy:#0B1F3A; --navy-2:#14304F; --navy-3:#1C3E63;
+    --ink:#101C2C; --slate:#4E5D6E; --slate-2:#7A8794;
+    --blue:#1655C0; --blue-2:#0E479F;
+    --brass:#B98A2F; --brass-2:#D9AE55;
+    --line:#E2E4DE; --line-2:#CFD3CB;
+    --display:"Schibsted Grotesk",ui-sans-serif,system-ui,sans-serif;
+    --body:"Public Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --ease:cubic-bezier(.22,.72,.22,1);
+    --wrap:1240px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased;opacity:1;transition:opacity .3s ease}
+  body.leaving{opacity:0}
+  body.entering{opacity:0}
+  h1,h2,h3{font-family:var(--display);margin:0;color:var(--navy);letter-spacing:-.022em;line-height:1.05;font-weight:800}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  ::selection{background:var(--navy);color:#fff}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 30px}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-2)}
+  .code{font-family:var(--mono);letter-spacing:.02em}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+
+  .logo-cut{filter:brightness(0);opacity:.92;transition:opacity .2s}
+  a:hover>.logo-cut{opacity:1}
+  .logo-cut.on-dark{filter:brightness(0) invert(1)}
+
+  #progress{position:fixed;top:0;left:0;height:2.5px;width:0;background:linear-gradient(90deg,var(--brass),var(--brass-2));z-index:300}
+
+  /* intro shutter (home) */
+  #intro{position:fixed;inset:0;z-index:250;pointer-events:none}
+  #intro .panel{position:absolute;left:0;right:0;height:50.5%;background:var(--paper);transition:transform .85s var(--ease) 1.35s}
+  #intro .panel.t{top:0} #intro .panel.b{bottom:0}
+  #intro.open .panel.t{transform:translateY(-101%)} #intro.open .panel.b{transform:translateY(101%)}
+  #intro .lockup{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .4s ease 1.15s}
+  #intro.open .lockup{opacity:0}
+  #intro img{height:56px;margin:0 auto 26px;opacity:0;transform:translateY(12px) scale(.96);transition:opacity .8s var(--ease) .1s,transform .8s var(--ease) .1s}
+  #intro.go img{opacity:.92;transform:none}
+  #intro .rule{width:220px;height:2px;background:var(--line);margin:0 auto;position:relative;overflow:hidden}
+  #intro .rule i{position:absolute;inset:0;right:auto;width:0;background:var(--brass)}
+  #intro.go .rule i{width:100%;transition:width .95s var(--ease) .3s}
+  #intro .tag{margin-top:18px;font-size:11.5px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--slate-2);opacity:0;transition:opacity .6s .7s,letter-spacing 1s var(--ease) .7s}
+  #intro.go .tag{opacity:1;letter-spacing:.22em}
+
+  .util{background:var(--navy);color:#B9C6D6;font-size:12px}
+  .util .wrap{display:flex;align-items:center;gap:24px;height:36px}
+  .util a{color:#DCE5EF;font-weight:500}
+  .util a:hover{color:var(--brass-2)}
+  .util .sp{flex:1}
+  .util .code{font-size:11px;color:#8FA2B8}
+  .util .code b{color:#C9D5E2;font-weight:500}
+
+  header.nav{position:sticky;top:0;z-index:90;background:rgba(250,250,248,.92);backdrop-filter:blur(12px) saturate(130%);border-bottom:1px solid var(--line)}
+  header.nav .wrap{display:flex;align-items:center;gap:30px;height:78px}
+  .brandlink{display:flex;align-items:center}
+  .brandlink img{height:34px;width:auto}
+  .brandlink .fallback{display:none;font-family:var(--display);font-weight:800;color:var(--navy);font-size:19px}
+  .brandlink.broken img{display:none}
+  .brandlink.broken .fallback{display:block}
+  nav.links{display:flex;gap:26px;align-items:center}
+  nav.links>a,.dd>button{font-size:15px;font-weight:600;color:var(--navy-2);padding:8px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .25s;background:none;border-top:0;border-left:0;border-right:0;cursor:pointer;font-family:var(--body)}
+  nav.links>a:hover,nav.links>a.active,.dd:hover>button,.dd>button.active{color:var(--blue-2);border-bottom-color:var(--brass)}
+  .dd{position:relative}
+  .dd .menu{position:absolute;top:calc(100% + 14px);left:-18px;min-width:290px;background:var(--white);border:1px solid var(--line);border-radius:10px;box-shadow:0 26px 54px -22px rgba(11,31,58,.35);padding:8px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .22s var(--ease),transform .22s var(--ease),visibility .22s}
+  .dd:hover .menu,.dd:focus-within .menu{opacity:1;visibility:visible;transform:none}
+  .dd .menu a{display:block;padding:10px 14px;border-radius:7px;font-size:14.5px;font-weight:600;color:var(--navy-2);transition:background .15s,transform .15s}
+  .dd .menu a small{display:block;font-weight:500;color:var(--slate-2);font-size:12px;margin-top:2px}
+  .dd .menu a:hover{background:var(--wash);color:var(--blue-2);transform:translateX(3px)}
+  .nav-sp{flex:1}
+  .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:13px 22px;border-radius:6px;border:1.5px solid transparent;cursor:pointer;transition:transform .18s var(--ease),background .2s,color .2s,border-color .2s,box-shadow .2s;font-family:var(--body)}
+  .btn::before{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-18deg);transition:left .55s var(--ease)}
+  .btn:hover::before{left:120%}
+  .btn .ar{transition:transform .2s var(--ease)}
+  .btn:hover .ar{transform:translateX(4px)}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:var(--blue-2);transform:translateY(-1px);box-shadow:0 10px 24px -8px rgba(11,31,58,.45)}
+  .btn-line{border-color:var(--line-2);color:var(--navy)}
+  .btn-line:hover{border-color:var(--navy)}
+  .btn-brass{background:var(--brass);color:#fff}
+  .btn-brass:hover{background:var(--brass-2);color:var(--navy);transform:translateY(-1px)}
+  .menu-btn{display:none;background:none;border:1.5px solid var(--line-2);border-radius:6px;width:44px;height:40px;font-size:18px;color:var(--navy);cursor:pointer}
+
+  /* interior page hero */
+  .phero{position:relative;background:var(--navy);color:#fff;overflow:hidden}
+  .phero .bgimg{position:absolute;inset:-6% 0;background-size:cover;background-position:center;opacity:.20;transform:scale(1.08);animation:kb 20s var(--ease) forwards;will-change:transform}
+  @keyframes kb{to{transform:scale(1.01)}}
+  .phero .weave{position:absolute;inset:0;opacity:.5;background:
+    radial-gradient(70% 120% at 85% 10%,rgba(22,85,192,.35),transparent 55%),
+    radial-gradient(50% 90% at 10% 95%,rgba(185,138,47,.16),transparent 60%)}
+  .phero .gridbg{position:absolute;inset:-60px;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:52px 52px;animation:drift 26s linear infinite}
+  @keyframes drift{to{transform:translate(52px,52px)}}
+  .phero::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(11,31,58,.5) 30%,rgba(11,31,58,0) 100%)}
+  .phero .wrap{position:relative;z-index:2;padding:96px 30px 88px}
+  .phero .crumb{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:#9DB2C9;text-transform:uppercase;margin-bottom:22px;opacity:0;transform:translateY(14px);animation:up .7s var(--ease) .15s forwards}
+  .phero .crumb a:hover{color:var(--brass-2)}
+  .phero h1{color:#fff;font-size:clamp(38px,5.2vw,66px);font-weight:900;max-width:22ch;opacity:0;transform:translateY(22px);animation:up .8s var(--ease) .28s forwards}
+  .phero h1 em{font-style:normal;color:var(--brass-2)}
+  .phero .lede{margin:24px 0 0;font-size:18.5px;color:#C3D1E1;max-width:64ch;opacity:0;transform:translateY(18px);animation:up .8s var(--ease) .44s forwards}
+  .phero .rule{width:0;height:3px;background:var(--brass);margin-top:34px;animation:draw 1s var(--ease) .6s forwards}
+  @keyframes up{to{opacity:1;transform:none}}
+  @keyframes draw{to{width:96px}}
+
+  /* home hero */
+  .hero{padding:74px 0 66px;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center}
+  .st{opacity:0;transform:translateY(20px);animation:up .8s var(--ease) forwards}
+  .st1{animation-delay:.1s}.st2{animation-delay:.22s}.st3{animation-delay:.36s}.st4{animation-delay:.5s}.st5{animation-delay:.64s}.st6{animation-delay:.78s}
+  .hero .badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+  .hero .badges span{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy-2);border:1px solid var(--line-2);background:var(--white);border-radius:99px;padding:6px 13px}
+  .hero .badges span.gold{border-color:var(--brass);color:var(--brass);background:transparent}
+  .rotator{position:relative;display:block}
+  .rotator .slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s var(--ease),visibility .6s}
+  .rotator .slide.on{opacity:1;visibility:visible;position:relative}
+  .hero h1{font-size:clamp(40px,5.3vw,72px);font-weight:900}
+  .hero h1 em{font-style:normal;color:var(--blue);position:relative;white-space:nowrap}
+  .hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.1em;background:var(--brass);opacity:.55;transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease) .35s}
+  .rotator .slide.on em::after{transform:scaleX(1)}
+  .hero .sub{margin:26px 0 32px;font-size:18.5px;color:var(--slate);max-width:46ch}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .hero .glance{display:flex;margin-top:44px;border-top:1px solid var(--line);padding-top:26px}
+  .hero .glance .g{padding-right:36px;margin-right:36px;border-right:1px solid var(--line)}
+  .hero .glance .g:last-child{border-right:0;margin-right:0;padding-right:0}
+  .hero .glance .n{font-family:var(--display);font-weight:800;font-size:34px;color:var(--navy);letter-spacing:-.02em;line-height:1}
+  .hero .glance .n sup{font-size:.52em;color:var(--brass);top:-.5em}
+  .hero .glance .l{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-2);margin-top:8px}
+  .hero .dots{display:flex;gap:8px;margin-top:26px}
+  .hero .dots button{width:26px;height:3px;border:0;border-radius:2px;background:var(--line-2);cursor:pointer;padding:0;transition:background .25s,width .25s}
+  .hero .dots button.on{background:var(--brass);width:40px}
+  .hero-visual{position:relative}
+  .hero-visual .frame{position:relative;border-radius:10px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(11,31,58,.5)}
+  .hero-visual .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,rgba(11,31,58,0) 55%,rgba(11,31,58,.42));pointer-events:none}
+  .hero-visual img{width:100%;height:520px;object-fit:cover;transform:scale(1.08);animation:kb 20s var(--ease) forwards}
+  .hero-visual.broken .frame{display:none}
+  .hero-visual .contract{position:absolute;left:-22px;bottom:34px;background:var(--white);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:8px;padding:14px 18px;box-shadow:0 18px 40px -18px rgba(11,31,58,.35)}
+  .hero-visual .contract .k{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-2)}
+  .hero-visual .contract .v{font-family:var(--mono);font-size:14px;color:var(--navy);font-weight:600;margin-top:4px}
+  .hero-visual .contract .p{font-family:var(--mono);font-size:11px;color:var(--slate-2);margin-top:3px}
+
+  .serve{background:var(--navy);padding:40px 0 46px;overflow:hidden}
+  .serve .head{display:flex;align-items:baseline;gap:20px;justify-content:space-between;flex-wrap:wrap;margin-bottom:30px}
+  .serve h2{color:#fff;font-size:clamp(22px,2.6vw,30px);font-weight:700}
+  .serve .head p{margin:0;color:#96A9C0;font-size:14.5px;max-width:56ch}
+  .marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .marquee .track{display:flex;gap:70px;width:max-content;align-items:center;animation:mq 36s linear infinite}
+  .marquee:hover .track{animation-play-state:paused}
+  @keyframes mq{to{transform:translateX(-50%)}}
+  .seal{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .seal img{height:74px;width:74px;object-fit:contain;filter:drop-shadow(0 4px 14px rgba(0,0,0,.35));transition:transform .3s var(--ease)}
+  .seal:hover img{transform:scale(1.08)}
+  .seal span{font-size:11px;font-weight:700;letter-spacing:.18em;color:#8FA2B8}
+  .seal.broken{display:none}
+
+  section{padding:92px 0}
+  .sec-head{max-width:66ch;margin-bottom:48px}
+  .sec-head h2,.split h2{position:relative;display:inline-block;font-size:clamp(30px,3.8vw,48px);margin-top:16px}
+  .sec-head h2::after,.split h2::after{content:"";position:absolute;left:0;bottom:-12px;width:64px;height:3px;background:var(--brass);transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease) .2s}
+  .in .sec-head h2::after,.sec-head.in h2::after,.split .in h2::after,.in h2::after{transform:scaleX(1)}
+  .sec-head p{color:var(--slate);font-size:17.5px;margin:24px 0 0}
+  .reveal,.reveal-l,.reveal-r,.reveal-s{opacity:0}
+  .reveal{transform:translateY(26px)}
+  .reveal-l{transform:translateX(-32px)}
+  .reveal-r{transform:translateX(32px)}
+  .reveal-s{transform:scale(.94)}
+  .reveal.in,.reveal-l.in,.reveal-r.in,.reveal-s.in{opacity:1;transform:none;transition:opacity .75s var(--ease),transform .75s var(--ease)}
+  .prose p{color:var(--slate);font-size:16.5px;margin:0 0 20px;max-width:72ch}
+  .prose p b{color:var(--navy)}
+
+  .split{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:70px;align-items:center}
+  .split .body p{color:var(--slate);font-size:17px;margin:24px 0 0}
+  .checks{list-style:none;margin:26px 0 0;padding:0}
+  .checks li{position:relative;padding:12px 0 12px 30px;border-top:1px solid var(--line);font-weight:600;color:var(--navy-2);font-size:15.5px}
+  .checks li:last-child{border-bottom:1px solid var(--line)}
+  .checks li::before{content:"";position:absolute;left:2px;top:19px;width:14px;height:14px;background:var(--brass);opacity:.9;clip-path:polygon(14% 44%,0 60%,42% 100%,100% 16%,84% 2%,40% 68%)}
+  .more{display:inline-flex;align-items:center;gap:9px;margin-top:28px;font-weight:700;color:var(--blue-2)}
+  .more:hover .ar{transform:translateX(4px)}
+  .more .ar{transition:transform .2s var(--ease)}
+  .photo{position:relative}
+  .photo img{width:100%;height:480px;object-fit:cover;border-radius:10px}
+  .photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:1.5px solid var(--line-2);border-radius:10px;z-index:-1}
+  .photo .est{position:absolute;top:-16px;right:22px;background:var(--navy);color:#fff;border-radius:6px;padding:10px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+  .photo.broken{display:none}
+
+  .caps-sec{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .caps-list{border-top:1px solid var(--line)}
+  .cap{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) auto;gap:34px;align-items:center;padding:34px 6px;border-bottom:1px solid var(--line);transition:background .25s,padding .3s var(--ease)}
+  .cap:hover{background:var(--wash);padding-left:18px}
+  .cap h3{font-size:clamp(20px,2.4vw,28px);font-weight:800}
+  .cap .tagline{display:block;margin-top:7px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+  .cap p{margin:0;color:var(--slate);font-size:15.5px;max-width:58ch}
+  .cap .go{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;color:var(--navy);font-size:17px;transition:.3s var(--ease)}
+  .cap:hover .go{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateX(4px)}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:28px;transition:border-color .25s,box-shadow .3s,transform .3s var(--ease)}
+  .card:hover{border-color:var(--navy-3);box-shadow:0 22px 44px -26px rgba(11,31,58,.35);transform:translateY(-4px)}
+  .card h3{font-size:19px;font-weight:800;margin-bottom:12px}
+  .card h3 .tick{color:var(--brass);margin-right:8px}
+  .card p{margin:0;color:var(--slate);font-size:14.5px}
+  .card .k{font-family:var(--mono);font-size:11.5px;color:var(--brass);font-weight:600;letter-spacing:.06em;display:block;margin-bottom:10px;text-transform:uppercase}
+  a.card{display:block}
+  a.card .more{margin-top:16px;font-size:14px}
+  .card .checks li{color:#DDE7F1;border-color:rgba(255,255,255,.14)}
+  .card .checks li:last-child{border-bottom-color:rgba(255,255,255,.14)}
+
+  .vcard{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:28px;transition:.3s var(--ease)}
+  .vcard:hover{border-color:var(--navy-3);box-shadow:0 22px 44px -26px rgba(11,31,58,.35);transform:translateY(-4px)}
+  .vcard .vh{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+  .vcard h3{font-size:19px;font-weight:800}
+  .vcard .num{font-family:var(--mono);font-size:12.5px;color:var(--blue-2);font-weight:600;background:rgba(22,85,192,.07);border:1px solid rgba(22,85,192,.18);border-radius:5px;padding:5px 9px;white-space:nowrap}
+  .vcard .period{font-family:var(--mono);font-size:11.5px;color:var(--slate-2);margin-bottom:14px}
+  .vcard p{margin:0 0 14px;color:var(--slate);font-size:14.5px}
+  .vcard .sins{display:flex;flex-wrap:wrap;gap:7px}
+  .vcard .sins span{font-family:var(--mono);font-size:11px;color:var(--navy-2);border:1px solid var(--line-2);border-radius:4px;padding:4px 8px;background:var(--paper)}
+  .far{font-family:var(--mono);font-size:11.5px;color:var(--brass);font-weight:600;display:block;margin-bottom:10px}
+
+  .pres{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .pres .gridbg{position:absolute;inset:-60px;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:52px 52px;animation:drift 26s linear infinite}
+  .pres .wrap{position:relative}
+  .pres .eyebrow{color:var(--brass-2)}
+  .pres blockquote{margin:26px 0 0;font-family:var(--display);font-weight:600;font-size:clamp(24px,3.2vw,38px);line-height:1.28;color:#F4F7FA;max-width:26ch}
+  .pres blockquote .hl{color:var(--brass-2)}
+  .pres .attr{margin-top:34px;display:flex;align-items:center;gap:16px}
+  .avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center 20%;border:2px solid rgba(217,174,85,.5);flex-shrink:0}
+  .avatar.broken{display:none}
+  .pres .attr .who b{display:block;font-size:16px;font-weight:700;color:#fff}
+  .pres .attr .who span{font-size:13px;color:#96A9C0}
+  .pres a.readmore{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-weight:700;color:var(--brass-2);font-size:15px}
+  .pres a.readmore:hover{color:#fff}
+  .tq{border-left:3px solid var(--brass);padding:6px 0 6px 24px}
+  .tq p{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.45;color:var(--navy-2);margin:0 0 12px;font-style:italic}
+  .tq span{font-size:13px;font-weight:600;color:var(--slate-2);letter-spacing:.06em;text-transform:uppercase}
+
+  .values-row{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
+  .values-row .v{padding:8px 34px 8px 30px;border-right:1px solid var(--line)}
+  .values-row .v h3{font-size:22px;display:flex;align-items:baseline;gap:12px}
+  .values-row .v h3 i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--brass);font-weight:600}
+  .values-row .v p{color:var(--slate);font-size:15px;margin:14px 0 0}
+
+  /* technology partners */
+  .plats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .plat{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:26px 22px;display:flex;flex-direction:column;gap:14px;transition:border-color .25s,box-shadow .3s,transform .3s var(--ease)}
+  .plat:hover{border-color:var(--navy-3);box-shadow:0 22px 44px -26px rgba(11,31,58,.35);transform:translateY(-5px)}
+  .plat img{height:32px;width:auto;max-width:130px;object-fit:contain;object-position:left;filter:grayscale(1) opacity(.65);transition:filter .3s}
+  .plat:hover img{filter:grayscale(0) opacity(1)}
+  .plat img.broken{display:none}
+  .plat .nm{font-family:var(--display);font-weight:700;font-size:15.5px;color:var(--navy)}
+  .plat p{margin:0;font-size:13px;color:var(--slate);line-height:1.55}
+  .plat .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .plat .tags span{font-family:var(--mono);font-size:10px;color:var(--navy-2);border:1px solid var(--line-2);border-radius:4px;padding:3px 7px;background:var(--paper)}
+  .plat-group{margin-bottom:56px}
+  .plat-group .gh{display:flex;align-items:baseline;gap:16px;margin-bottom:22px}
+  .plat-group .gh h3{font-size:clamp(20px,2.4vw,26px)}
+  .plat-group .gh span{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);font-weight:600}
+
+  /* markets */
+  .mcards{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .mcard{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;transition:border-color .25s,box-shadow .3s,transform .3s var(--ease)}
+  .mcard:hover{border-color:var(--navy-3);box-shadow:0 22px 44px -26px rgba(11,31,58,.35);transform:translateY(-5px)}
+  .mcard .seals{display:flex;gap:6px;margin-bottom:16px;min-height:34px}
+  .mcard .seals img{height:34px;width:34px;object-fit:contain}
+  .mcard .seals img.broken{display:none}
+  .mcard h3{font-size:17.5px;font-weight:800;margin-bottom:9px}
+  .mcard p{margin:0 0 14px;font-size:13px;color:var(--slate);line-height:1.55}
+  .mcard .more{margin-top:auto;font-size:13.5px}
+  .sealrow{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
+  .sealrow .s{display:flex;align-items:center;gap:12px}
+  .sealrow .s img{height:56px;width:56px;object-fit:contain}
+  .sealrow .s img.broken{display:none}
+  .sealrow .s b{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--navy-2)}
+
+  .band{background:var(--navy);color:#fff;padding:64px 0}
+  .band .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+  .band .b .n{font-family:var(--display);font-weight:900;font-size:clamp(34px,4vw,50px);color:#fff;line-height:1}
+  .band .b .n sup{font-size:.5em;color:var(--brass-2)}
+  .band .b .l{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#96A9C0;margin-top:10px}
+
+  .cta{padding:100px 0;text-align:center;background:
+    linear-gradient(rgba(250,250,248,.4),rgba(250,250,248,.4)),
+    repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 96px)}
+  .cta h2{font-size:clamp(32px,4.4vw,56px);font-weight:900;max-width:22ch;margin:16px auto 0}
+  .cta h2 .hl{color:var(--blue)}
+  .cta p{color:var(--slate);max-width:54ch;margin:22px auto 36px;font-size:17.5px}
+  .cta .cta-row{justify-content:center}
+
+  .pager{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+  .pager a{padding:38px 30px;display:flex;flex-direction:column;gap:8px;transition:background .25s}
+  .pager a:hover{background:var(--wash)}
+  .pager a+a{border-left:1px solid var(--line);text-align:right;align-items:flex-end}
+  .pager .dir{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--slate-2);text-transform:uppercase}
+  .pager .nm{font-family:var(--display);font-weight:800;font-size:clamp(18px,2.4vw,26px);color:var(--navy);transition:color .2s}
+  .pager a:hover .nm{color:var(--blue-2)}
+
+  .contact-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:60px;align-items:start}
+  form.cf{display:grid;gap:18px}
+  .cf .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .cf label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy-2);margin-bottom:8px}
+  .cf input,.cf select,.cf textarea{width:100%;font-family:var(--body);font-size:15.5px;color:var(--ink);background:var(--white);border:1.5px solid var(--line-2);border-radius:7px;padding:13px 14px;transition:border-color .2s,box-shadow .2s}
+  .cf input:focus,.cf select:focus,.cf textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(22,85,192,.12)}
+  .cf textarea{min-height:150px;resize:vertical}
+  .side-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:26px;margin-bottom:20px}
+  .side-card h3{font-size:16px;margin-bottom:12px}
+  .side-card p,.side-card address{font-style:normal;margin:0;color:var(--slate);font-size:14.5px;line-height:1.7}
+  .side-card a{color:var(--blue-2);font-weight:600}
+  .map{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .map iframe{display:block;width:100%;height:280px;border:0;filter:saturate(.85)}
+
+  footer{background:#08182B;color:#96A9C0;padding:64px 0 30px;font-size:14.5px}
+  footer .cols{display:grid;grid-template-columns:minmax(0,3.6fr) repeat(4,minmax(0,2.1fr));gap:36px}
+  footer .flogo img{height:70px;width:auto;margin-bottom:20px}
+  footer .flogo .fallback{display:none;font-family:var(--display);font-weight:800;color:#fff;font-size:22px;margin-bottom:16px}
+  footer .flogo.broken img{display:none}
+  footer .flogo.broken .fallback{display:block}
+  footer .tag{color:#B9C6D6;max-width:30ch;margin:0}
+  footer h4{font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7E93AC;margin:0 0 18px}
+  footer ul{list-style:none;margin:0;padding:0}
+  footer li{margin-bottom:11px}
+  footer a{color:#C9D5E2;transition:color .2s,padding-left .2s}
+  footer a:hover{color:var(--brass-2)}
+  footer ul a:hover{padding-left:4px}
+  .footbar{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-top:28px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .footbar .ids{font-family:var(--mono);font-size:11.5px;color:#7E93AC;line-height:2}
+  .footbar .ids b{color:#C9D5E2;font-weight:500}
+  .footbar .badges{display:flex;gap:14px;align-items:center}
+  .footbar .badges img{height:46px;width:auto;background:#fff;border-radius:6px;padding:3px;transition:transform .25s var(--ease)}
+  .footbar .badges img:hover{transform:translateY(-3px)}
+  .footbar .badges img.broken{display:none}
+  .footbar address{font-style:normal;text-align:right;color:#B9C6D6;line-height:1.7;font-size:13.5px}
+  .footcopy{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);font-size:12.5px;color:#7E93AC}
+  .footcopy .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em}
+
+  .mobile-menu{display:none;position:fixed;inset:0;z-index:150;background:var(--navy);flex-direction:column;padding:30px;overflow:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu .x{align-self:flex-end;background:none;border:0;color:#fff;font-size:30px;cursor:pointer}
+  .mobile-menu a{color:#fff;font-family:var(--display);font-weight:700;font-size:22px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .mobile-menu a.sm{font-size:15px;font-family:var(--body);font-weight:500;color:#B9C6D6;padding:9px 0 9px 18px;border:0}
+
+  @media (max-width:1020px){
+    .hero .wrap,.split,.contact-grid{grid-template-columns:1fr;gap:44px}
+    .hero-visual img{height:380px}
+    .hero-visual .contract{left:16px}
+    .cap{grid-template-columns:1fr;gap:12px}
+    .cap .go{display:none}
+    .cards3,.cards2{grid-template-columns:1fr}
+    .plats{grid-template-columns:repeat(2,1fr)}
+    .mcards{grid-template-columns:repeat(2,1fr)}
+    .band .grid{grid-template-columns:repeat(2,1fr)}
+    .values-row{grid-template-columns:1fr;border-left:0}
+    .values-row .v{border-right:0;border-left:1px solid var(--line);margin-bottom:30px}
+    nav.links,header.nav .btn{display:none}
+    .menu-btn{display:block;margin-left:auto}
+    footer .cols{grid-template-columns:1fr 1fr}
+    .footbar address{text-align:left}
+  }
+  @media (max-width:600px){
+    body{font-size:15.5px}
+    .wrap{padding:0 20px}
+    section{padding:64px 0}
+    .util .hide-sm{display:none}
+    .hero{padding:48px 0 44px}
+    .hero .glance{flex-wrap:wrap;gap:20px}
+    .hero .glance .g{border-right:0;padding-right:0;margin-right:24px}
+    .hero-visual img{height:300px}
+    .phero .wrap{padding:64px 20px 56px}
+    footer .cols{grid-template-columns:1fr}
+    .footbar{justify-content:center;text-align:center}
+    .footbar address{text-align:center}
+    .cf .row2{grid-template-columns:1fr}
+    .band .grid{grid-template-columns:1fr 1fr;gap:24px}
+    .pager{grid-template-columns:1fr}
+    .pager a+a{border-left:0;border-top:1px solid var(--line)}
+    .plats,.mcards{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto}
+    #intro{display:none}
+    body.entering{opacity:1}
+    .reveal,.reveal-l,.reveal-r,.reveal-s,.st,.phero .crumb,.phero h1,.phero .lede{opacity:1;transform:none}
+    .phero .rule{width:96px}
+    .sec-head h2::after,.split h2::after{transform:scaleX(1)}
+    .rotator .slide{position:relative;display:none}
+    .rotator .slide.on{display:block}
+    .marquee .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}
+  }
+
+  .card .sealrow .s b{color:#DDE7F1}
+  .card .sealrow .s img{filter:drop-shadow(0 3px 10px rgba(0,0,0,.4))}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="intro" aria-hidden="true">
+  <div class="panel t"></div>
+  <div class="panel b"></div>
+  <div class="lockup">
+    <div>
+      <img class="logo-cut" src="https://emergingtech.co/brand/logo-stacked.png" alt="">
+      <div class="rule"><i></i></div>
+      <div class="tag">Mission-Driven IT &middot; Est. 2015</div>
+    </div>
+  </div>
+</div>
+<div class="util">
+  <div class="wrap">
+    <a href="mailto:collaborate@emergingtech.co">collaborate@emergingtech.co</a>
+    <a href="https://www.linkedin.com/company/emerging-tech/" class="hide-sm">LinkedIn</a>
+    <span class="sp"></span>
+    <span class="code hide-sm">UEI <b>JTMSJZJBHXA5</b></span>
+    <span class="code">CAGE <b>7VYV9</b></span>
+  </div>
+</div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brandlink" href="index.html" aria-label="Emerging Tech home">
+      <img class="logo-cut" src="https://emergingtech.co/brand/logo-horizontal-sm.png" alt="Emerging Tech">
+      <span class="fallback">Emerging Tech</span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <div class="dd">
+        <button type="button" >About Us &#9662;</button>
+        <div class="menu">
+          <a href="about.html">About Us <small>Who we are &middot; est. 2015</small></a>
+          <a href="presidents-message.html">President's Message <small>Gaurav Seth &middot; USAF veteran</small></a>
+          <a href="our-people.html">Our People <small>85+ pros &middot; 22 states</small></a>
+          <a href="technology-platforms.html">Technology Platforms <small>Oracle Health &middot; Epic &middot; AWS &middot; more</small></a>
+        </div>
+      </div>
+      <div class="dd">
+        <button type="button" >Capabilities &#9662;</button>
+        <div class="menu">
+          <a href="cybersecurity.html">Cybersecurity <small>Zero Trust &middot; RMF &middot; ATO</small></a>
+          <a href="healthcare-modernization.html">Healthcare Modernization <small>EHR &middot; interoperability</small></a>
+          <a href="mission-support.html">Mission Support <small>PM &middot; SAFe &middot; staffing</small></a>
+          <a href="systems-integration.html">Technology &amp; System Integration <small>Enterprise &middot; mobile &middot; IV&amp;V</small></a>
+          <a href="cloud-solutions.html">Cloud Solutions <small>AWS &middot; Azure &middot; FedRAMP</small></a>
+        </div>
+      </div>
+      <div class="dd">
+        <button type="button" >Markets &#9662;</button>
+        <div class="menu">
+          <a href="markets.html">All Markets <small>Where we serve</small></a>
+          <a href="veteran-services.html">Veterans Services <small>VA &middot; SDVOSB-led</small></a>
+          <a href="healthcare.html">Healthcare <small>Federal health IT</small></a>
+          <a href="defense.html">Defense <small>DoD &middot; intel</small></a>
+          <a href="civilian.html">Civilian <small>Federal law enforcement +</small></a>
+          <a href="state-local.html">State &amp; Local <small>Florida</small></a>
+        </div>
+      </div>
+      <a href="contracts.html" >Contract Vehicles</a>
+      <a href="careers.html" >Careers</a>
+    </nav>
+    <span class="nav-sp"></span>
+    <a class="btn btn-navy" href="contact.html">Contact Us <span class="ar">&rarr;</span></a>
+    <button class="menu-btn" id="menuOpen" aria-label="Open menu">&#9776;</button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="x" id="menuClose" aria-label="Close menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="presidents-message.html" class="sm">President's Message</a>
+  <a href="our-people.html" class="sm">Our People</a>
+  <a href="technology-platforms.html" class="sm">Technology Platforms</a>
+  <a href="cybersecurity.html">Capabilities</a>
+  <a href="cybersecurity.html" class="sm">Cybersecurity</a>
+  <a href="healthcare-modernization.html" class="sm">Healthcare Modernization</a>
+  <a href="mission-support.html" class="sm">Mission Support</a>
+  <a href="systems-integration.html" class="sm">Tech &amp; System Integration</a>
+  <a href="cloud-solutions.html" class="sm">Cloud Solutions</a>
+  <a href="markets.html">Markets</a>
+  <a href="veteran-services.html" class="sm">Veterans Services</a>
+  <a href="healthcare.html" class="sm">Healthcare</a>
+  <a href="defense.html" class="sm">Defense</a>
+  <a href="civilian.html" class="sm">Civilian</a>
+  <a href="state-local.html" class="sm">State &amp; Local</a>
+  <a href="contracts.html">Contract Vehicles</a>
+  <a href="careers.html">Careers</a>
+  <a href="contact.html">Contact Us</a>
+</div>
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="badges st st1"><span>SDVOSB</span><span>8(a)</span><span>HUBZone</span><span class="gold">CMMI Level 3</span></div>
+      <div class="rotator st st2" id="rotator" aria-live="polite">
+        <h1 class="slide on">Mission&#8209;Focused. People&#8209;Centered. <em>Innovation&#8209;Driven.</em></h1>
+        <h1 class="slide">Securing the nation's <em>digital frontier.</em></h1>
+        <h1 class="slide">Cloud. Modernized <em>with purpose.</em></h1>
+      </div>
+      <p class="sub st st3">Since 2015, Emerging Tech has delivered secure, standards-driven IT solutions to federal agencies and mission partners. Our cleared professionals bring deep domain expertise to cybersecurity, healthcare modernization, cloud, and enterprise integration.</p>
+      <div class="cta-row st st4">
+        <a class="btn btn-navy" href="cybersecurity.html">Our capabilities <span class="ar">&rarr;</span></a>
+        <a class="btn btn-line" href="careers.html">Join the ET team</a>
+      </div>
+      <div class="glance st st5">
+        <div class="g"><div class="n" data-count="10">0<sup>+</sup></div><div class="l">Years of business</div></div>
+        <div class="g"><div class="n" data-count="85">0<sup>+</sup></div><div class="l">Professionals</div></div>
+        <div class="g"><div class="n" data-count="22">0</div><div class="l">States</div></div>
+      </div>
+      <div class="dots st st6" id="heroDots" role="tablist" aria-label="Hero messages">
+        <button class="on" aria-label="Message 1"></button><button aria-label="Message 2"></button><button aria-label="Message 3"></button>
+      </div>
+    </div>
+    <div class="hero-visual st st3">
+      <div class="frame"><img src="https://emergingtech.co/images/sections/consulting-pm.jpg" alt="Emerging Tech consultants collaborating on a federal program"></div>
+      <div class="contract">
+        <div class="k">GSA Multiple Award Schedule</div>
+        <div class="v">47QTCA22D00C7</div>
+        <div class="p">Active &middot; Aug 2022 &ndash; Aug 2027</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="serve" aria-label="Agencies we have supported">
+  <div class="wrap head">
+    <h2>Proud to serve</h2>
+    <p>Our team has supported some of the nation's most vital organizations &mdash; from combatant commands to intelligence agencies &mdash; with integrity, expertise, and commitment.</p>
+  </div>
+  <div class="marquee"><div class="track" id="sealTrack">
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-dod.svg" alt="Department of Defense seal" loading="lazy"><span>DOD</span></div>
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-af.svg" alt="U.S. Air Force seal" loading="lazy"><span>AIR FORCE</span></div>
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-nsa.svg" alt="National Security Agency seal" loading="lazy"><span>NSA</span></div>
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-dia.png" alt="Defense Intelligence Agency seal" loading="lazy"><span>DIA</span></div>
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-fbi.png" alt="FBI seal" loading="lazy"><span>FBI</span></div>
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-va.svg" alt="Department of Veterans Affairs seal" loading="lazy"><span>VA</span></div>
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-disa.png" alt="Defense Information Systems Agency seal" loading="lazy"><span>DISA</span></div>
+    <div class="seal"><img src="https://emergingtech.co/seals/seal-navy.png" alt="U.S. Navy seal" loading="lazy"><span>NAVY</span></div>
+  </div></div>
+</div>
+
+<section>
+  <div class="wrap split">
+    <div class="body reveal-l">
+      <span class="eyebrow">We are Emerging Tech</span>
+      <h2>Mission driven, standards guided, client focused.</h2>
+      <p>Emerging Tech was founded to deliver standards-based, end-to-end IT consultancy to federal agencies and mission partners. Our team of over 85 professionals is located across the United States, bringing deep domain expertise to the programs that matter most.</p>
+      <ul class="checks">
+        <li>SDVOSB and 8(a) HUBZone certified</li>
+        <li>Cleared, credentialed professionals across 22 states</li>
+        <li>CMMI Level 3 and standards-driven delivery</li>
+      </ul>
+      <a class="more" href="about.html">More about us <span class="ar">&rarr;</span></a>
+    </div>
+    <div class="photo reveal-r">
+      <img src="https://emergingtech.co/images/sections/consulting-staffing.jpg" alt="Emerging Tech team collaborating on mission-critical solutions" loading="lazy">
+      <div class="est">EST. 2015 &middot; ALACHUA, FL</div>
+    </div>
+  </div>
+</section>
+
+<section class="caps-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our capabilities</span>
+      <h2>Five practices. One standard of delivery.</h2>
+      <p>Helping agencies modernize operations, protect critical systems, and deliver better outcomes for the people they serve.</p>
+    </div>
+    <div class="caps-list">
+      <a class="cap reveal" href="cybersecurity.html">
+        <div><h3>Cybersecurity</h3><span class="tagline">Always verify, never trust</span></div>
+        <p>RMF implementation, Zero Trust architecture, vulnerability management, and NIST compliance. Security built in from day one.</p>
+        <span class="go">&rarr;</span>
+      </a>
+      <a class="cap reveal" href="healthcare-modernization.html">
+        <div><h3>Healthcare Modernization</h3><span class="tagline">Connected care at scale</span></div>
+        <p>EHR modernization, clinical workflow optimization, healthcare data interoperability, and system integration at enterprise scale.</p>
+        <span class="go">&rarr;</span>
+      </a>
+      <a class="cap reveal" href="mission-support.html">
+        <div><h3>Mission Support</h3><span class="tagline">Aligned to the objective</span></div>
+        <p>Program management, strategic communications, change management, and staff augmentation aligned to mission objectives.</p>
+        <span class="go">&rarr;</span>
+      </a>
+      <a class="cap reveal" href="systems-integration.html">
+        <div><h3>Technology &amp; System Integration</h3><span class="tagline">One coherent enterprise</span></div>
+        <p>Enterprise systems integration, data engineering, cloud and DevSecOps modernization, and digital transformation.</p>
+        <span class="go">&rarr;</span>
+      </a>
+      <a class="cap reveal" href="cloud-solutions.html">
+        <div><h3>Cloud Solutions</h3><span class="tagline">Modernized with purpose</span></div>
+        <p>Secure cloud architectures across AWS, Azure, and hybrid environments with FedRAMP alignment, governance, and lifecycle support.</p>
+        <span class="go">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Markets we serve</span>
+      <h2>Delivering mission-focused IT across federal, defense, and state government.</h2>
+    </div>
+    <div class="mcards">
+      <a class="mcard reveal-s" href="veteran-services.html">
+        <div class="seals"><img src="https://emergingtech.co/seals/seal-va.svg" alt="VA seal" loading="lazy"></div>
+        <h3>Veterans Services</h3>
+        <p>SDVOSB-led services aligned to VA and veteran-serving missions.</p>
+        <span class="more">Learn more <span class="ar">&rarr;</span></span>
+      </a>
+      <a class="mcard reveal-s" href="healthcare.html">
+        <div class="seals"><img src="https://emergingtech.co/seals/seal-va.svg" alt="VA seal" loading="lazy"></div>
+        <h3>Healthcare</h3>
+        <p>Federal health IT, EHR modernization, and connected care.</p>
+        <span class="more">Learn more <span class="ar">&rarr;</span></span>
+      </a>
+      <a class="mcard reveal-s" href="defense.html">
+        <div class="seals"><img src="https://emergingtech.co/seals/seal-dod.svg" alt="DOD seal" loading="lazy"><img src="https://emergingtech.co/seals/seal-af.svg" alt="Air Force seal" loading="lazy"><img src="https://emergingtech.co/seals/seal-nsa.svg" alt="NSA seal" loading="lazy"></div>
+        <h3>Defense</h3>
+        <p>Cleared engineering for DoD, intel, and national-security missions.</p>
+        <span class="more">Learn more <span class="ar">&rarr;</span></span>
+      </a>
+      <a class="mcard reveal-s" href="civilian.html">
+        <div class="seals"><img src="https://emergingtech.co/seals/seal-fbi.png" alt="FBI seal" loading="lazy"></div>
+        <h3>Civilian</h3>
+        <p>Modernization across federal civilian agencies and shared services.</p>
+        <span class="more">Learn more <span class="ar">&rarr;</span></span>
+      </a>
+      <a class="mcard reveal-s" href="state-local.html">
+        <div class="seals"><img src="https://emergingtech.co/seals/seal-florida.svg" alt="Florida seal" loading="lazy"></div>
+        <h3>State &amp; Local</h3>
+        <p>Cybersecurity and modernization for state and municipal missions.</p>
+        <span class="more">Learn more <span class="ar">&rarr;</span></span>
+      </a>
+    </div>
+    <div class="reveal" style="margin-top:26px;text-align:right"><a class="more" href="markets.html">View all markets <span class="ar">&rarr;</span></a></div>
+  </div>
+</section>
+
+<section class="pres">
+  <div class="gridbg"></div>
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">A message from our president</span>
+      <blockquote>&ldquo;Drawing from my background in the United States Air Force, I operate with a focus on <span class="hl">accountability, operational discipline, and outcomes</span> &mdash; centered on those we ultimately serve.&rdquo;</blockquote>
+      <div class="attr">
+        <img class="avatar" src="https://emergingtech.co/images/sections/president-portrait.jpg" alt="Gaurav Seth" loading="lazy">
+        <div class="who"><b>Gaurav Seth</b><span>President &middot; U.S. Air Force Veteran</span></div>
+      </div>
+      <a class="readmore" href="presidents-message.html">Read the full message <span class="ar">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="caps-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Technology partners</span>
+      <h2>Trusted platforms powering mission-critical environments.</h2>
+      <p>Commercial-off-the-shelf products, cloud services, AI and automation, and custom development &mdash; integrated to address complex operational needs.</p>
+    </div>
+    <div class="plats">
+      <div class="plat reveal-s">
+      <img src="https://emergingtech.co/brand/platforms/oracle-health.png" alt="Oracle Health (Cerner)" loading="lazy">
+      <div class="nm">Oracle Health (Cerner)</div>
+      <p>Implementation, integration, and optimization of Oracle Health solutions &mdash; enabling improved clinical workflows, interoperability, and healthcare delivery outcomes.</p>
+      <div class="tags"><span>Implementation</span><span>Clinical Workflows</span><span>Interoperability</span></div>
+    </div><div class="plat reveal-s">
+      <img src="https://emergingtech.co/brand/platforms/epic.svg" alt="Epic" loading="lazy">
+      <div class="nm">Epic</div>
+      <p>Technical and operational support for Epic systems, including deployment coordination, data integration, and user adoption to enhance system performance.</p>
+      <div class="tags"><span>Deployment</span><span>Data Integration</span><span>User Adoption</span></div>
+    </div><div class="plat reveal-s">
+      <img src="https://emergingtech.co/brand/platforms/vista.svg" alt="VistA" loading="lazy">
+      <div class="nm">VistA</div>
+      <p>Legacy system sustainment and modernization for VistA &mdash; ensuring continuity of care while enabling transition to modern EHR platforms.</p>
+      <div class="tags"><span>Sustainment</span><span>Continuity of Care</span><span>EHR Transition</span></div>
+    </div><div class="plat reveal-s">
+      <img src="https://emergingtech.co/brand/platforms/servicenow.png" alt="ServiceNow" loading="lazy">
+      <div class="nm">ServiceNow</div>
+      <p>Implementation and optimization of ServiceNow to streamline IT service management, workflow automation, and enterprise service delivery.</p>
+      <div class="tags"><span>ITSM</span><span>Workflow Automation</span><span>User Experience</span></div>
+    </div>
+    </div>
+    <div class="plats" style="margin-top:18px;grid-template-columns:repeat(3,1fr)">
+      <div class="plat reveal-s">
+      <img src="https://emergingtech.co/brand/platforms/power-bi.svg" alt="Microsoft Power BI" loading="lazy">
+      <div class="nm">Microsoft Power BI</div>
+      <p>Interactive dashboards and reporting solutions providing real-time visibility into operations, performance metrics, and program outcomes.</p>
+      <div class="tags"><span>Dashboards</span><span>Real-Time Visibility</span><span>Metrics</span></div>
+    </div><div class="plat reveal-s">
+      <img src="https://emergingtech.co/brand/platforms/azure.png" alt="Microsoft Azure" loading="lazy">
+      <div class="nm">Microsoft Azure</div>
+      <p>Enterprise application modernization, identity management, and data integration &mdash; secure hybrid architectures, automation, and analytics.</p>
+      <div class="tags"><span>App Modernization</span><span>Identity &amp; Access</span><span>Hybrid</span></div>
+    </div><div class="plat reveal-s">
+      <img src="https://emergingtech.co/brand/platforms/aws.png" alt="Amazon Web Services" loading="lazy">
+      <div class="nm">Amazon Web Services</div>
+      <p>Secure, scalable cloud environments supporting federal and commercial workloads &mdash; migration, DevSecOps pipelines, and FedRAMP-aligned architectures.</p>
+      <div class="tags"><span>Cloud Migration</span><span>DevSecOps</span><span>FedRAMP</span></div>
+    </div>
+    </div>
+    <div class="reveal" style="margin-top:30px;text-align:center"><a class="btn btn-line" href="technology-platforms.html">Explore our platforms <span class="ar">&rarr;</span></a></div>
+  </div>
+</section>
+<section class="cta">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h2>Ready to connect with us? <span class="hl">Reach out today.</span></h2>
+    <p>We have the personnel and skills to help your organization achieve your goals.</p>
+    <div class="cta-row">
+      <a class="btn btn-navy" href="contact.html">Collaborate with us <span class="ar">&rarr;</span></a>
+      <a class="btn btn-line" href="https://emergingtech.co/openings">See current openings</a>
+    </div>
+  </div>
+</section></main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="flogo" href="index.html" aria-label="Emerging Tech home">
+          <img class="logo-cut on-dark" src="https://emergingtech.co/brand/logo-stacked.png" alt="Emerging Tech">
+          <span class="fallback">Emerging Tech</span>
+        </a>
+        <p class="tag">Mission driven, standards guided, client focused. Delivering innovative IT solutions to federal agencies.</p>
+      </div>
+      <div>
+        <h4>Capabilities</h4>
+        <ul>
+          <li><a href="cybersecurity.html">Cybersecurity</a></li>
+          <li><a href="healthcare-modernization.html">Healthcare Modernization</a></li>
+          <li><a href="mission-support.html">Mission Support</a></li>
+          <li><a href="systems-integration.html">Tech &amp; Systems Integration</a></li>
+          <li><a href="cloud-solutions.html">Cloud Solutions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="presidents-message.html">President's Message</a></li>
+          <li><a href="our-people.html">Our People</a></li>
+          <li><a href="technology-platforms.html">Technology Platforms</a></li>
+          <li><a href="contracts.html">Contract Vehicles</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Markets</h4>
+        <ul>
+          <li><a href="veteran-services.html">Veterans Services</a></li>
+          <li><a href="healthcare.html">Healthcare</a></li>
+          <li><a href="defense.html">Defense</a></li>
+          <li><a href="civilian.html">Civilian</a></li>
+          <li><a href="state-local.html">State &amp; Local</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="https://emergingtech.co/openings">Current Openings</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="mailto:collaborate@emergingtech.co">collaborate@emergingtech.co</a></li>
+          <li><a href="https://www.linkedin.com/company/emerging-tech/">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footbar">
+      <div class="ids">UEI <b>JTMSJZJBHXA5</b><br>CAGE <b>7VYV9</b></div>
+      <div class="badges">
+        <img src="https://emergingtech.co/badges/badge-hubzone.webp" alt="HUBZone certified" loading="lazy">
+        <img src="https://emergingtech.co/badges/badge-sdvosb.png" alt="SDVOSB certified" loading="lazy">
+        <img src="https://emergingtech.co/badges/badge-8a.png" alt="SBA 8(a) certified" loading="lazy">
+        <img src="https://emergingtech.co/badges/badge-mbe.webp" alt="Minority Business Enterprise" loading="lazy">
+      </div>
+      <address>13900 Tech City Circle, Suite 400<br>Alachua, FL 32615</address>
+    </div>
+    <div class="footcopy">
+      <span>&copy; 2026 Emerging Tech, LLC. All Rights Reserved.</span>
+      <span class="mono">MISSION-DRIVEN IT &middot; ALACHUA, FL</span>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* page enter fade */
+  if(!reduce){
+    document.body.classList.add('entering');
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.remove('entering'); }); });
+  }
+
+  /* scroll progress */
+  var prog = document.getElementById('progress');
+  if(prog){
+    addEventListener('scroll', function(){
+      var h = document.documentElement;
+      prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight || 1) * 100) + '%';
+    }, {passive:true});
+  }
+
+  /* intro shutter (home) */
+  var intro = document.getElementById('intro');
+  if(intro){
+    var seen = false;
+    try{ seen = sessionStorage.getItem('et_intro') === '1'; }catch(e){}
+    if(reduce || seen){ intro.remove(); }
+    else{
+      requestAnimationFrame(function(){ intro.classList.add('go'); });
+      setTimeout(function(){ intro.classList.add('open'); try{ sessionStorage.setItem('et_intro','1'); }catch(e){} }, 300);
+      setTimeout(function(){ intro.remove(); }, 2700);
+    }
+  }
+
+  /* page-leave fade */
+  if(!reduce){
+    document.querySelectorAll('a[href$=".html"], a[href*=".html#"]').forEach(function(a){
+      a.addEventListener('click', function(ev){
+        if(ev.metaKey||ev.ctrlKey||ev.shiftKey||a.target==='_blank') return;
+        ev.preventDefault();
+        document.body.classList.add('leaving');
+        setTimeout(function(){ location.href = a.getAttribute('href'); }, 240);
+      });
+    });
+  }
+
+  /* broken-image fallbacks */
+  document.querySelectorAll('img').forEach(function(img){
+    img.addEventListener('error', function(){
+      img.classList.add('broken');
+      var host = img.closest('.brandlink, .flogo, .seal, .hero-visual, .photo');
+      if(host) host.classList.add('broken');
+    });
+  });
+
+  /* parallax on interior hero image */
+  var bgimg = document.querySelector('.phero .bgimg');
+  if(bgimg && !reduce){
+    addEventListener('scroll', function(){
+      var y = Math.min(window.scrollY, 600);
+      bgimg.style.transform = 'scale(1.05) translateY(' + (y * 0.18) + 'px)';
+    }, {passive:true});
+  }
+
+  /* hero rotator */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('#rotator .slide'));
+  if(slides.length){
+    var dots = Array.prototype.slice.call(document.querySelectorAll('#heroDots button'));
+    var cur = 0, timer = null;
+    var show = function(i){
+      slides[cur].classList.remove('on'); dots[cur].classList.remove('on');
+      cur = i % slides.length;
+      slides[cur].classList.add('on'); dots[cur].classList.add('on');
+    };
+    if(!reduce){
+      timer = setInterval(function(){ show(cur+1); }, 5200);
+      dots.forEach(function(d,i){ d.addEventListener('click', function(){ clearInterval(timer); show(i); timer = setInterval(function(){ show(cur+1); }, 5200); }); });
+    } else {
+      dots.forEach(function(d,i){ d.addEventListener('click', function(){ show(i); }); });
+    }
+  }
+
+  /* marquee duplicate */
+  var track = document.getElementById('sealTrack');
+  if(track && !reduce){ track.innerHTML += track.innerHTML; }
+
+  /* reveals with per-parent stagger */
+  var sel = '.reveal,.reveal-l,.reveal-r,.reveal-s';
+  var els = Array.prototype.slice.call(document.querySelectorAll(sel));
+  if(!reduce){
+    var groups = new Map();
+    els.forEach(function(el){
+      var p = el.parentElement;
+      if(!groups.has(p)) groups.set(p, 0);
+      var n = groups.get(p);
+      el.style.transitionDelay = (Math.min(n,7) * 80) + 'ms';
+      groups.set(p, n+1);
+    });
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -36px 0px'});
+  els.forEach(function(el){ io.observe(el); });
+  /* headline underline draw */
+  var hio = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); hio.unobserve(e.target); } });
+  }, {threshold:.4});
+  document.querySelectorAll('.sec-head, .split .body, .split > div').forEach(function(el){ hio.observe(el); });
+
+  /* count-up */
+  var counters = document.querySelectorAll('[data-count]');
+  if(counters.length){
+    var done = false;
+    var cio = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting && !done){
+          done = true;
+          counters.forEach(function(el){
+            var t = parseInt(el.getAttribute('data-count'),10);
+            var sup = el.querySelector('sup'); var supHTML = sup ? sup.outerHTML : '';
+            if(reduce){ el.innerHTML = t + supHTML; return; }
+            var start = null;
+            var step = function(ts){
+              if(!start) start = ts;
+              var p = Math.min((ts-start)/900,1), ez = 1-Math.pow(1-p,3);
+              el.innerHTML = Math.round(ez*t) + supHTML;
+              if(p<1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          });
+          cio.disconnect();
+        }
+      });
+    }, {threshold:.5});
+    cio.observe(counters[0]);
+  }
+
+  /* mobile menu */
+  var mm = document.getElementById('mobileMenu');
+  var mo = document.getElementById('menuOpen'), mc = document.getElementById('menuClose');
+  if(mo){ mo.addEventListener('click', function(){ mm.classList.add('open'); }); }
+  if(mc){ mc.addEventListener('click', function(){ mm.classList.remove('open'); }); }
+  if(mm){ mm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ mm.classList.remove('open'); }); }); }
+
+  /* contact form -> mailto */
+  var cf = document.getElementById('contactForm');
+  if(cf){
+    cf.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var f = new FormData(cf);
+      var body = 'Name: '+f.get('name')+'%0AOrganization: '+(f.get('org')||'—')+'%0AReason: '+f.get('reason')+'%0A%0A'+encodeURIComponent(f.get('msg'));
+      location.href = 'mailto:collaborate@emergingtech.co?subject='+encodeURIComponent('['+f.get('reason')+'] Inquiry from '+f.get('name'))+'&body='+body;
+    });
+  }
+})();
+</script>
+</body>
+</html>
